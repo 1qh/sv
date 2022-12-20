@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { Button, Listgroup } from 'flowbite-svelte'
+	import { Button, Hr, Layout, Li, List, Listgroup, P } from 'flowbite-svelte'
 	import Car from './car.svelte'
 	import Greet from './greet.svelte'
-
+	import Prices from './prices.svelte'
 	const car = {
 		name: 'VFe34',
 		type: 'SUV',
@@ -53,32 +53,75 @@
 </script>
 
 <div>
-	{#if user.login}
-		<Button on:click={toggle}>Log out</Button>
-	{:else}
-		<Button on:click={toggle}>Log in</Button>
-	{/if}
-	<br />
-	<Car {...car} />
+	<P align="center">
+		{#if user.login}
+			<Button
+				pill
+				gradient
+				color="purpleToBlue"
+				shadow="purple"
+				size="lg"
+				class="w-24"
+				on:click={toggle}>Log out</Button>
+		{:else}
+			<Button
+				pill
+				gradient
+				color="purpleToBlue"
+				shadow="purple"
+				size="lg"
+				class="w-24"
+				on:click={toggle}>Log in</Button>
+		{/if}
+	</P>
+	<Hr />
+
+	<P space="widest" size="xl" weight="extrabold"><Car {...car} /></P>
+
+	<Hr />
+
 	<Greet />
 	<Greet holiday={'New Year'} />
-	<Button on:click={removeFirst}>Remove first</Button>
-	<Button on:click={removeLast}>Remove last</Button>
-	<Listgroup active items={cart} let:item>{item.name}</Listgroup>
+
+	<Hr />
+	<Layout gap={0}>
+		<P align="center">
+			<Button class="w-48" on:click={removeFirst}>Remove first</Button>
+		</P>
+		<P align="center">
+			<Button class="w-48" on:click={removeLast}>Remove last</Button>
+		</P>
+	</Layout>
+
+	<Listgroup items={cart} let:item><Prices product={item.name} /></Listgroup>
+
+	<List tag="ul">
+		{#each cart as item (item.id)}
+			<Li><Prices product={item.name} /></Li>
+		{/each}
+	</List>
+
+	<Hr />
+
+	{#if num > 6}
+		<P>{num} is greater than 6</P>
+	{:else if 3 > num}
+		<P>{num} is less than 3</P>
+	{:else}
+		<P>{num} is between 3 and 6</P>
+	{/if}
 	<Button on:click={increment}>
 		&#8730;{num} = {sqr}
 	</Button>
-	{#if num > 6}
-		<p>{num} is greater than 6</p>
-	{:else if 3 > num}
-		<p>{num} is less than 3</p>
-	{:else}
-		<p>{num} is between 3 and 6</p>
-	{/if}
+
+	<Hr />
+
 	<Button on:click={appendNum}>
 		{arr.join(' + ')} = {sum}
 	</Button>
-	<br />
+
+	<Hr />
+
 	<Button on:click={clickForRandom}>Generate random number</Button>
 	{#await promise}
 		...wait
@@ -87,4 +130,6 @@
 	{:catch error}
 		{error.message}
 	{/await}
+
+	<Hr />
 </div>
