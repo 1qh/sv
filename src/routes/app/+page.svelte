@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { Button, Listgroup } from 'flowbite-svelte'
 	import Car from './car.svelte'
 	import Greet from './greet.svelte'
-	import Prices from './prices.svelte'
 
 	const car = {
 		name: 'VFe34',
@@ -52,44 +52,39 @@
 	let clickForRandom = () => (promise = fetchRandom())
 </script>
 
-<Car {...car} />
-<Greet />
-<Greet holiday={'New Year'} />
-<hr />
-{#if user.login}
-	<button on:click={toggle}> Log out </button>
-{:else}
-	<button on:click={toggle}> Log in </button>
-{/if}
-<hr />
-<button on:click={removeFirst}>Remove first</button>
-<button on:click={removeLast}>Remove last</button>
-<ul>
-	{#each cart as item (item.id)}
-		<li><Prices product={item.name} /></li>
-	{/each}
-</ul>
-<hr />
-<button on:click={increment}>
-	&#8730;{num} = {sqr}
-</button>
-{#if num > 6}
-	<p>{num} is greater than 6</p>
-{:else if 3 > num}
-	<p>{num} is less than 3</p>
-{:else}
-	<p>{num} is between 3 and 6</p>
-{/if}
-<hr />
-<button on:click={appendNum}>
-	{arr.join(' + ')} = {sum}
-</button>
-<hr />
-<button on:click={clickForRandom}> Generate random number </button>
-{#await promise}
-	...wait
-{:then num}
-	{num}
-{:catch error}
-	{error.message}
-{/await}
+<div>
+	{#if user.login}
+		<Button on:click={toggle}>Log out</Button>
+	{:else}
+		<Button on:click={toggle}>Log in</Button>
+	{/if}
+	<br />
+	<Car {...car} />
+	<Greet />
+	<Greet holiday={'New Year'} />
+	<Button on:click={removeFirst}>Remove first</Button>
+	<Button on:click={removeLast}>Remove last</Button>
+	<Listgroup active items={cart} let:item>{item.name}</Listgroup>
+	<Button on:click={increment}>
+		&#8730;{num} = {sqr}
+	</Button>
+	{#if num > 6}
+		<p>{num} is greater than 6</p>
+	{:else if 3 > num}
+		<p>{num} is less than 3</p>
+	{:else}
+		<p>{num} is between 3 and 6</p>
+	{/if}
+	<Button on:click={appendNum}>
+		{arr.join(' + ')} = {sum}
+	</Button>
+	<br />
+	<Button on:click={clickForRandom}>Generate random number</Button>
+	{#await promise}
+		...wait
+	{:then num}
+		{num}
+	{:catch error}
+		{error.message}
+	{/await}
+</div>
