@@ -91,6 +91,10 @@
 	})()
 </script>
 
+<svelte:head>
+	<title>App</title>
+</svelte:head>
+
 <div>
 	<p>
 		{formatter.format($time)}

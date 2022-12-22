@@ -1,1 +1,5 @@
-<h1><a href="/app">Go to /app</a></h1>
+<svelte:head>
+	<title>Home</title>
+</svelte:head>
+
+<div class="overflow-scroll h-screen ml-3 pt-3">Homepage is currently empty</div>
