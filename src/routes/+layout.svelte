@@ -44,10 +44,12 @@
 			<NavUl {hidden}>
 				<NavLi href="/">Home</NavLi>
 				<NavLi href="/app">App</NavLi>
+				<NavLi href="/blog">Blog</NavLi>
+				<NavLi href="/todo">Todo</NavLi>
 			</NavUl>
 		</Navbar>
 	</div>
-	<div class="overflow-scroll h-screen ml-3 pt-3">
+	<div class="overflow-scroll h-screen ml-3 mr-3 pt-4">
 		<slot />
 	</div>
 </div>
