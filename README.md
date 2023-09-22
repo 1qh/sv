@@ -1,4 +1,4 @@
 ```sh
 bun i
-bun run dev
+bun dev
 ```
